@@ -24,10 +24,10 @@ def run_simulation(algorithm, dataset):
 # Parameters
 algorithms = [
     ("central", "central"),
-    ("community", "community"),
+    ("community", "community12p"),
+    ("community", "community25p"),
     ("p2p", "p2p"),
     ("dynamic", "p2p"),
-    ("dynamic_enhanced", "p2p"),
 ]
 
 number_of_nodes = [
@@ -35,13 +35,16 @@ number_of_nodes = [
     196
 ]
 
-print(f"GENERATING {len(algorithms) * len(number_of_nodes)} COMBINATIONS")
+occupations = ["high", "low"]
+
+print(f"GENERATING {len(algorithms) * len(number_of_nodes) * len(occupations)} COMBINATIONS")
 
 # Generating list of combinations with the parameters specified
 combinations = list(
     itertools.product(
         algorithms,
-        number_of_nodes
+        number_of_nodes,
+        occupations,
     )
 )
 
@@ -53,14 +56,15 @@ for i, parameters in enumerate(combinations, 1):
     # Parsing parameters
     algorithm = parameters[0]
     number_of_nodes = parameters[1]
+    occupation = parameters[2]
 
     print(f"\t[Execution {i}]")
-    print(f"\t\t[algorithm={algorithm[0]}] [number_of_nodes={number_of_nodes}]")
+    print(f"\t\t[algorithm={algorithm[0]}] [number_of_nodes={number_of_nodes}] [occupation={occupation}]")
 
     # Executing algorithm
     proc = run_simulation(
         algorithm=algorithm[0],
-        dataset=f"datasets/{algorithm[1]}\;nodes\={number_of_nodes}.json"
+        dataset=f"datasets/{algorithm[1]}\;nodes\={number_of_nodes}\;occupation={occupation}.json"
     )
 
     processes.append(proc)

@@ -1,0 +1,97 @@
+{
+    "map": {
+        "grid_type": "hexagonal",
+        "dimensions": {
+            "width": 10,
+            "height": 10
+        }
+    },
+    "network": {
+        "wireless_delay": 10,
+        "topology": {
+            "algorithm": "partially_connected_hexagonal_mesh",
+            "link_specifications": [
+                {
+                    "number_of_objects": 261,
+                    "delay": 10,
+                    "bandwidth": 125
+                }
+            ]
+        }
+    },
+    "edge_servers": {
+        "specifications": [
+            {
+                "is_implemented": false,
+                "name": "sgi",
+                "number_of_objects": 8,
+                "cpu": 32,
+                "memory": 32768,
+                "disk": 131072
+            },
+            {
+                "is_implemented": false,
+                "name": "hpe",
+                "number_of_objects": 8,
+                "cpu": 48,
+                "memory": 65536,
+                "disk": 131072
+            },
+            {
+                "is_implemented": false,
+                "name": "acer",
+                "number_of_objects": 8,
+                "cpu": 36,
+                "memory": 65536,
+                "disk": 131072
+            }
+        ]
+    },
+    "container_registries": {
+        "specifications": {
+            "cpu_demand": 2,
+            "memory_demand": 8192,
+            "images": []
+        }
+    },
+    "container_images": [],
+    "applications": {
+        "random_requirements": {
+            "service_demand_values": [
+                {
+                    "cpu_demand": 2,
+                    "memory_demand": 2048
+                },
+                {
+                    "cpu_demand": 4,
+                    "memory_demand": 4096
+                },
+                {
+                    "cpu_demand": 8,
+                    "memory_demand": 8192
+                }
+            ]
+        },
+        "specifications": []
+    },
+    "users": [
+        {
+            "number_of_objects": 20,
+            "mobility_model": "edge_sim_py.pathway",
+            "seconds_to_move": {
+                "min": 45,
+                "max": 185
+            },
+            "type": "vehicle"
+        },
+        {
+            "number_of_objects": 108,
+            "mobility_model": "edge_sim_py.pathway",
+            "seconds_to_move": {
+                "min": 333,
+                "max": 1000
+            },
+            "type": "pedestrian"
+        }
+    ]
+}

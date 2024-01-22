@@ -1,6 +1,6 @@
-# WSCAD - Registry
+# Dynamic Registry Provisioning
 
-This repository includes the datasets and algorithms to perform the experiments made in the paper "Dynamic Provisioning of Container Registries in Edge Computing Infrastructures" submitted to the *XXIV Simpósio em Sistemas Computacionais de Alto Desempenho* (WSCAD). 
+TBD.
 
 ## Configuring the environment
 
@@ -20,14 +20,18 @@ To build the necessary datasets to replicate the paper's experiments, run the fo
 ```sh
 poetry run python -m datasets -s 1 -i datasets/inputs/nodes=100\;occupation=low.json -o central\;nodes=100\;occupation=low -rp central >> create_datasets.log && \
 poetry run python -m datasets -s 1 -i datasets/inputs/nodes=196\;occupation=low.json -o central\;nodes=196\;occupation=low -rp central >> create_datasets.log && \
-poetry run python -m datasets -s 1 -i datasets/inputs/nodes=100\;occupation=low.json -o community\;nodes=100\;occupation=low -rp community -c 3 >> create_datasets.log && \
-poetry run python -m datasets -s 1 -i datasets/inputs/nodes=196\;occupation=low.json -o community\;nodes=196\;occupation=low -rp community -c 6 >> create_datasets.log && \
+poetry run python -m datasets -s 1 -i datasets/inputs/nodes=100\;occupation=low.json -o community12p\;nodes=100\;occupation=low -rp community -c 3 >> create_datasets.log && \
+poetry run python -m datasets -s 1 -i datasets/inputs/nodes=100\;occupation=low.json -o community25p\;nodes=100\;occupation=low -rp community -c 6 >> create_datasets.log && \
+poetry run python -m datasets -s 1 -i datasets/inputs/nodes=196\;occupation=low.json -o community12p\;nodes=196\;occupation=low -rp community -c 6 >> create_datasets.log && \
+poetry run python -m datasets -s 1 -i datasets/inputs/nodes=196\;occupation=low.json -o community25p\;nodes=196\;occupation=low -rp community -c 12 >> create_datasets.log && \
 poetry run python -m datasets -s 1 -i datasets/inputs/nodes=100\;occupation=low.json -o p2p\;nodes=100\;occupation=low -rp p2p >> create_datasets.log && \
 poetry run python -m datasets -s 1 -i datasets/inputs/nodes=196\;occupation=low.json -o p2p\;nodes=196\;occupation=low -rp p2p >> create_datasets.log && \
 poetry run python -m datasets -s 1 -i datasets/inputs/nodes=100\;occupation=high.json -o central\;nodes=100\;occupation=high -rp central >> create_datasets.log && \
 poetry run python -m datasets -s 1 -i datasets/inputs/nodes=196\;occupation=high.json -o central\;nodes=196\;occupation=high -rp central >> create_datasets.log && \
-poetry run python -m datasets -s 1 -i datasets/inputs/nodes=100\;occupation=high.json -o community\;nodes=100\;occupation=high -rp community -c 3 >> create_datasets.log && \
-poetry run python -m datasets -s 1 -i datasets/inputs/nodes=196\;occupation=high.json -o community\;nodes=196\;occupation=high -rp community -c 6 >> create_datasets.log && \
+poetry run python -m datasets -s 1 -i datasets/inputs/nodes=100\;occupation=high.json -o community12p\;nodes=100\;occupation=high -rp community -c 3 >> create_datasets.log && \
+poetry run python -m datasets -s 1 -i datasets/inputs/nodes=100\;occupation=high.json -o community25p\;nodes=100\;occupation=high -rp community -c 6 >> create_datasets.log && \
+poetry run python -m datasets -s 1 -i datasets/inputs/nodes=196\;occupation=high.json -o community12p\;nodes=196\;occupation=high -rp community -c 6 >> create_datasets.log && \
+poetry run python -m datasets -s 1 -i datasets/inputs/nodes=196\;occupation=high.json -o community25p\;nodes=196\;occupation=high -rp community -c 12 >> create_datasets.log && \
 poetry run python -m datasets -s 1 -i datasets/inputs/nodes=100\;occupation=high.json -o p2p\;nodes=100\;occupation=high -rp p2p >> create_datasets.log && \
 poetry run python -m datasets -s 1 -i datasets/inputs/nodes=196\;occupation=high.json -o p2p\;nodes=196\;occupation=high -rp p2p >> create_datasets.log
 ```

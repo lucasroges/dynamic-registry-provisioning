@@ -8,16 +8,15 @@ NUMBER_OF_PARALLEL_PROCESSES =  os.cpu_count() - 1
 
 SEED = "1"
 
-def run_simulation(algorithm, dataset, replicas, percentage_of_replicated_images):
+def run_simulation(algorithm, dataset, replicas):
     """Executes the simulation with the specified parameters.
 
     Args:
         algorithm (str): Algorithm to be executed.
         dataset (str): Dataset to be used.
         replicas (int): Number of replicas to be used.
-        percentage_of_replicated_images (float): Percentage of replicated images to be used.
     """
-    cmd = f"poetry run python -m simulation -a {algorithm} -d {dataset} -s {SEED} -n 3600 -r {replicas} -p {percentage_of_replicated_images}"
+    cmd = f"poetry run python -m simulation -a {algorithm} -d {dataset} -s {SEED} -n 3600 -r {replicas}"
     print(f"    cmd = {cmd}")
 
     return Popen([cmd], stdout=DEVNULL, stderr=DEVNULL, shell=True)
@@ -33,19 +32,19 @@ number_of_nodes = [
     196
 ]
 
-replicas = [1, 2, 3]
+occupations = ["high", "low"]
 
-percentage_of_replicated_images = [0.5, 0.6, 0.7, 0.8, 0.9, 1]
+replicas = [1, 2, 3, 4]
 
-print(f"GENERATING {len(algorithms) * len(number_of_nodes) * len(replicas) * len(percentage_of_replicated_images)} COMBINATIONS")
+print(f"GENERATING {len(algorithms) * len(number_of_nodes) * len(occupations) * len(replicas)} COMBINATIONS")
 
 # Generating list of combinations with the parameters specified
 combinations = list(
     itertools.product(
         algorithms,
         number_of_nodes,
+        occupations,
         replicas,
-        percentage_of_replicated_images
     )
 )
 
@@ -57,18 +56,17 @@ for i, parameters in enumerate(combinations, 1):
     # Parsing parameters
     algorithm = parameters[0]
     number_of_nodes = parameters[1]
-    replicas = parameters[2]
-    percentage_of_replicated_images = parameters[3]
+    occupation = parameters[2]
+    replicas = parameters[3]
 
     print(f"\t[Execution {i}]")
-    print(f"\t\t[algorithm={algorithm[0]}] [number_of_nodes={number_of_nodes}]")
+    print(f"\t\t[algorithm={algorithm[0]}] [number_of_nodes={number_of_nodes}] [occupation={occupation}] [replicas={replicas}]")
 
     # Executing algorithm
     proc = run_simulation(
         algorithm=algorithm[0],
-        dataset=f"datasets/{algorithm[1]}\;nodes\={number_of_nodes}.json",
+        dataset=f"datasets/{algorithm[1]}\;nodes={number_of_nodes}\;occupation={occupation}.json",
         replicas=replicas,
-        percentage_of_replicated_images=percentage_of_replicated_images
     )
 
     processes.append(proc)
