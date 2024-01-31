@@ -1,0 +1,1418 @@
+{
+    "map": {
+        "grid_type": "hexagonal",
+        "dimensions": {
+            "width": 14,
+            "height": 14
+        }
+    },
+    "network": {
+        "wireless_delay": 10,
+        "topology": {
+            "algorithm": "partially_connected_hexagonal_mesh",
+            "link_specifications": [
+                {
+                    "number_of_objects": 533,
+                    "delay": 10,
+                    "bandwidth": 125
+                }
+            ]
+        }
+    },
+    "edge_servers": {
+        "specifications": [
+            {
+                "is_implemented": false,
+                "name": "sgi",
+                "number_of_objects": 16,
+                "cpu": 32,
+                "memory": 32768,
+                "disk": 131072
+            },
+            {
+                "is_implemented": false,
+                "name": "hpe",
+                "number_of_objects": 16,
+                "cpu": 48,
+                "memory": 65536,
+                "disk": 131072
+            },
+            {
+                "is_implemented": false,
+                "name": "acer",
+                "number_of_objects": 16,
+                "cpu": 36,
+                "memory": 65536,
+                "disk": 131072
+            }
+        ]
+    },
+    "container_registries": {
+        "specifications": {
+            "cpu_demand": 2,
+            "memory_demand": 8192,
+            "images": [
+                {
+                    "name": "registry",
+                    "tag": "latest"
+                },
+                {
+                    "name": "pytorch-inference-graviton:2.1.0-cpu-py310-ubuntu20.04-sagemaker",
+                    "tag": "latest"
+                },
+                {
+                    "name": "tensorflow-inference-graviton:2.9.1-cpu-py38-ubuntu20.04-ec2",
+                    "tag": "latest"
+                },
+                {
+                    "name": "tensorflow-inference:2.12.1-cpu-py310-ubuntu20.04-sagemaker",
+                    "tag": "latest"
+                },
+                {
+                    "name": "pytorch-inference-graviton:1.12.1-cpu-py38-ubuntu20.04-sagemaker",
+                    "tag": "latest"
+                },
+                {
+                    "name": "tensorflow-training:2.8.3-cpu-py39-ubuntu20.04-sagemaker",
+                    "tag": "latest"
+                },
+                {
+                    "name": "tensorflow-inference:2.9.2-cpu-py39-ubuntu20.04-ec2",
+                    "tag": "latest"
+                },
+                {
+                    "name": "tensorflow-training:2.12.0-cpu-py310-ubuntu20.04-sagemaker",
+                    "tag": "latest"
+                },
+                {
+                    "name": "tensorflow-inference:2.12.1-cpu-py310-ubuntu20.04-ec2",
+                    "tag": "latest"
+                },
+                {
+                    "name": "tensorflow-inference-graviton:2.12.1-cpu-py310-ubuntu20.04-sagemaker",
+                    "tag": "latest"
+                },
+                {
+                    "name": "tensorflow-training:2.11.0-cpu-py39-ubuntu20.04-sagemaker",
+                    "tag": "latest"
+                },
+                {
+                    "name": "tensorflow-training:2.9.2-cpu-py39-ubuntu20.04-ec2",
+                    "tag": "latest"
+                },
+                {
+                    "name": "pytorch-training:2.0.1-cpu-py310-ubuntu20.04-ec2",
+                    "tag": "latest"
+                },
+                {
+                    "name": "pytorch-inference-graviton:1.12.1-cpu-py38-ubuntu20.04-ec2",
+                    "tag": "latest"
+                },
+                {
+                    "name": "huggingface-pytorch-inference:1.13.1-transformers4.26.0-cpu-py39-ubuntu20.04",
+                    "tag": "latest"
+                },
+                {
+                    "name": "autogluon-inference:0.8.2-cpu-py39-ubuntu20.04",
+                    "tag": "latest"
+                },
+                {
+                    "name": "autogluon-training:0.6.2-cpu-py38-ubuntu20.04",
+                    "tag": "latest"
+                }
+            ]
+        }
+    },
+    "container_images": [
+        {
+            "name": "registry",
+            "tag": "latest",
+            "digest": "sha256:0d153fadf70b612a5215e3a788a0b58ba6fa25e5df4b59698e0feb2174e8a98c",
+            "layers": [
+                {
+                    "digest": "sha256:aa5968d388b8652cd305e0e037751228967839d83d0cafbde5debf0b092e7c42",
+                    "size": 5543699,
+                    "instruction": "#(nop) ADD file:ac5fb7eb0d68040d948989f0a50914d0d4a6b631cfe76b508eecd82eb7d46953 in / "
+                },
+                {
+                    "digest": "sha256:4c73096394f0174cfd5711ef49ea3b75d78ee94b9a28c9a952b4ec6ac552d03f",
+                    "size": 18083840,
+                    "instruction": "set -eux; \tversion='2.8.1'; \tapkArch=\"$(apk --print-arch)\"; \tcase \"$apkArch\" in \t\tx86_64)  arch='amd64';   sha256='f1a376964912a5fd7d588107ebe5185da77803244e15476d483c945959347ee2' ;; \t\taarch64) arch='arm64';   sha256='4c588c8e62c9a84f1eecfba4c842fe363b91be87fd42e3b5dac45148a2f46c52' ;; \t\tarmhf)   arch='armv6';   sha256='d711b3b6e77f3acc7c89fad9310413ef145751ac702627dc1fa89991bf3b6104' ;; \t\tarmv7)   arch='armv7';   sha256='d2f2180c1a847056f9c5dcfd1d6fda4c6086d126204541e0ed047c04f30a0f91' ;; \t\tppc64le) arch='ppc64le'; sha256='ca77cdfb7b1415869558c118b5e783bb9d695a74d8426a0bd8d8a39beb23fb85' ;; \t\ts390x)   arch='s390x';   sha256='3e505af15c562870869441d5d1f79988c3c666b9a4370894ecf2f064860b48ba' ;; \t\t*) echo >&2 \"error: unsupported architecture: $apkArch\"; exit 1 ;; \tesac; \twget -O registry.tar.gz \"https://github.com/distribution/distribution/releases/download/v${version}/registry_${version}_linux_${arch}.tar.gz\"; \techo \"$sha256 *registry.tar.gz\" | sha256sum -c -; \ttar --extract --verbose --file registry.tar.gz --directory /bin/ registry; \trm registry.tar.gz; \tregistry --version"
+                }
+            ]
+        },
+        {
+            "name": "pytorch-inference-graviton:2.1.0-cpu-py310-ubuntu20.04-sagemaker",
+            "digest": "sha256:21586761c63bb8e224eed7779d8fcff7dc6bb096fbadf4c75870f22919417bf9",
+            "tag": "latest",
+            "layers": [
+                {
+                    "digest": "sha256:6cba4020c0a193cd551ed8edf368670967e3546345b52c4ec66cb0931436e9b9",
+                    "size": 27199503,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:68a7afde0bef28e9f0c535fe01c9a9d5b0f6f8cbe2f3c07960aea53e57d77eb3",
+                    "size": 451454911,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:73a82d16a8f4e835eb0102a4c18a689cfc09c8a2e4d95ae54f83c043d9d7db8d",
+                    "size": 4690918,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:0fc76ba4ba26cf0b947d0c96ed46038764e96ead9453c4516c8963a66f4e4ff9",
+                    "size": 104032680,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:b70ac51c204ee055030fcf09cd5ab983bcc36ff79a450c64498c7ebc2f01dc98",
+                    "size": 225832817,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:f5b2cf465b1b13c92822f62a332c1a4dcf3335544d458d8d75c30f9decc02cd4",
+                    "size": 207003560,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:5f314284535b6535e5a20973caf487ed421ee26015c92eadae8e18db63cfd4c0",
+                    "size": 65064626,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:9e743303f31f992fd550c1e1e6fa6ff16132db2bfe9fb46d6f12ab4d6c534418",
+                    "size": 1470290,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:77ff2e79f54b1133b5564e301ce99efd06abb537b0acf95f69786a3de3d1875e",
+                    "size": 133373196,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:7f6f06ac4f62e914e687e991d18628269d4e123649c9aad3be5c966941a2ef8c",
+                    "size": 52797516,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:b7a5758e3307566376154b60d6d43223802e9e93fe5abbaf0f6a952692ac419d",
+                    "size": 1445290,
+                    "instruction": ""
+                }
+            ]
+        },
+        {
+            "name": "tensorflow-inference-graviton:2.9.1-cpu-py38-ubuntu20.04-ec2",
+            "digest": "sha256:8a3e24828eefa58e74f2495cceff4322d3eb8efb00da69371d32cae18511064c",
+            "tag": "latest",
+            "layers": [
+                {
+                    "digest": "sha256:2378679266ac5157323158b6e52e7a884e559db5217037e57992e47a1667d525",
+                    "size": 27196396,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:83df1b517bd82181fa39e27101ac2383306f610e526817231b706aeb6925feea",
+                    "size": 199842159,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:6dde37474ce117b8d856c12c09e02216439e2dbedd8e6d312f67c96391c39313",
+                    "size": 63207197,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:068c1066cea749814d54a3c8fe1ace8c38dbc57f1bd99415d264bc26ab6457cb",
+                    "size": 5374336,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:b7ca6af68b7c2fec46329ec1a5a98a43b9193c6ada55e2d68b241e5755f05884",
+                    "size": 78553617,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:4cf4b469ec02c8add88844829a2a57e38637e699796b33395e4a92fe5668153f",
+                    "size": 101402000,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:1dd09245ca36e0e119856d4cf94cbdd6e6c72e1cac9b3aa2c0b5f6e8d40c18cb",
+                    "size": 1146465,
+                    "instruction": ""
+                }
+            ]
+        },
+        {
+            "name": "tensorflow-inference:2.12.1-cpu-py310-ubuntu20.04-sagemaker",
+            "digest": "sha256:9ae77a4b4006fde3e44f48d6e65322218458bcbf206d83516e11a69c5767019d",
+            "tag": "latest",
+            "layers": [
+                {
+                    "digest": "sha256:99803d4b97f3db529ae9ca4174b0951afac6b309e7deaa8ec3214c584e02b3a8",
+                    "size": 28578563,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:8d5daddf21edd05edc7beaf05933f3505d485ba018245b32026c573bdcc34980",
+                    "size": 208764097,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:c80de5516dbc57bab6e7b5b47dd6af321cc1cd79c9fbd6cc93107ddbb9349fc2",
+                    "size": 72607413,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:74bf7ecc4a24f085465f33bb1efb7b48adecdd72c56c841d17a21b7034db9c19",
+                    "size": 5508244,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:007e08f7ff3e0c6a6ffe0554b4eef2f8f5b54fba702ddd68b270812aef46e154",
+                    "size": 35248607,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:b779862c22bb8b3b422b3d0eab203ca4d592aa823f3c393f69a7cd0e57e6bfe0",
+                    "size": 109109612,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:83d3c64ff86af3ba891c54bd6078660a4030f4f2535d2088e4c6d9b04a6e33fd",
+                    "size": 1129136,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:6db276b52c22e28c6049da1cffe05b155dd2962794886439cb2f0d7196ca6817",
+                    "size": 3717972,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:947f9857aafe2e8bcde7873ad734ef98ec7e3f657d681c16c13ac0841e649e76",
+                    "size": 8989483,
+                    "instruction": ""
+                }
+            ]
+        },
+        {
+            "name": "pytorch-inference-graviton:1.12.1-cpu-py38-ubuntu20.04-sagemaker",
+            "digest": "sha256:ab7d9eb2f97fb079a44b72f1837b9aeaa4661c9707b0d44ad1f545146ab60974",
+            "tag": "latest",
+            "layers": [
+                {
+                    "digest": "sha256:0c68957c744181d1b5cae80a96971c651cec74faeade53191985b92abff361da",
+                    "size": 27196161,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:d60b18a8a404cf499d72bfde01496544bd13ec430924d4b502fd944a28bc6b62",
+                    "size": 591597758,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:ba4a72d00a7a595b5a9860d0e1e183c1e05c6e065720c23e804e981780d8198b",
+                    "size": 153658276,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:b44adc5411ad6b0dba9d0856c566bac6089d237e6fb149d976ae911fd1def882",
+                    "size": 120015808,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:adaee8d1b372433f06da59555872619b3f4ff5beb90b5a69f280fc49116f5309",
+                    "size": 106116315,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:5c350d67e9dd3a80c1cc80da1dedc05b2b04cac3dc389e9cd10ed676fd6b8f24",
+                    "size": 26960981,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:a26f21f84b6afbb800a57223ceb5dd01c7a4de3d405abad58178ff077d8f84a8",
+                    "size": 4691549,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:27c56c467eed45b6c1b4bb7ec84051617de255c36ccbcad3e117af0cf63ba4cd",
+                    "size": 43967644,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:63214257618b097ba128107c7d3aebb29eeaac7e83f04b18132481abee33dff2",
+                    "size": 334935076,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:3eabb3b1487e2fb34473693f4ac50a96adb1ecf7c6a108a56baaa129ceb4c179",
+                    "size": 8800829,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:fa2cf4d303f47461110bf65ed711b706d2d782213607d3e98c9f2f3536383f30",
+                    "size": 9623086,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:4f99561ac820e8decb52120f1d538074c30a79d8729e501c351a02ec2174786e",
+                    "size": 11491377,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:d23445edb0215f828ad6c4d3494976803629703613a1c2cd17b7f3bfaa1cb8a0",
+                    "size": 118310602,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:75a4b99d93c8ea1c23e0bddc87bcb70a5e1e3401cf34ba01968e2e3c753caad3",
+                    "size": 78539245,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:a312fa348f45212911b13b8aef25c1e0dcc22cc77d8766896d6c022f0f5c1129",
+                    "size": 1421971,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:c3f87d958966c3662c1a54d192c699856bc4427003ceeab2d7f6f2ced175a956",
+                    "size": 1426233,
+                    "instruction": ""
+                }
+            ]
+        },
+        {
+            "name": "tensorflow-training:2.8.3-cpu-py39-ubuntu20.04-sagemaker",
+            "digest": "sha256:ea39e3fe10e3fabebcfb498b5ec81e781e9b809886c2d5b384ce2f5dd1c1ddd6",
+            "tag": "latest",
+            "layers": [
+                {
+                    "digest": "sha256:675920708c8bf10fbd02693dc8f43ee7dbe0a99cdfd55e06e6f1a8b43fd08e3f",
+                    "size": 28572685,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:1772c704572869edfab50aa185ce48d6b19c6b5c94d257acfa8be97f3d694ca6",
+                    "size": 233621967,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:53d3e52317a4956cedf7420d32244b54f670c4d6296a457b2c89468d00cc131b",
+                    "size": 4044365,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:0125f243a27a5988e1af9c64738e06b071e523b20fdc3ab42a337bcc605fd157",
+                    "size": 103854809,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:c895e20ee3f4bf99a802098e6f6de1fc636cf3e5a84cb434f2e59c893c9be788",
+                    "size": 65854200,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:c71326f57de39ffe0d77b114c1a44f4e888ba0acba6813ca54b93ef1557ceec8",
+                    "size": 5652619,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:69f555875c4467e9fff19efc74c6455651e42bbdf982f42b8ce3ee93800a096a",
+                    "size": 31930073,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:bbb574b48b224befa9f522b131b29ad5f651f0356cc4c083ba62daa8b2e5588f",
+                    "size": 159030197,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:564029fe9a0a44c690f27731d78a3473d83ef2ba148b820cdf70f1331746fcc9",
+                    "size": 3250309,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:0feadf79ddb924e76e4ff4767664551564bb69e8a218dae5f1069d7f70367826",
+                    "size": 265200999,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:d06696fc05167116092e9c5f1f89901ef2267a672918463451157bd0259e7003",
+                    "size": 20371313,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:d194d695391e087318d5d48f694cbd984fddf94a2086a64a301dd628f7802cc0",
+                    "size": 141248597,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:dc87269f5012337d1efb5dbf65b183847d1e093a08734bfb5624789ec376d669",
+                    "size": 91397899,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:27d8ba4476f2c815faf31b4efde743382c6df1e39abddecb720d7750dd0b515a",
+                    "size": 28094822,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:5d3c93213fe4b355a710362d870c819f2a65fb50355290e877d5c8d77dbb5ca5",
+                    "size": 2363832,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:d8fcef0b16af3f35060dd12f06f9980f1da8a363af57c1494dac85cf0af2776c",
+                    "size": 1565076,
+                    "instruction": ""
+                }
+            ]
+        },
+        {
+            "name": "tensorflow-inference:2.9.2-cpu-py39-ubuntu20.04-ec2",
+            "digest": "sha256:8d9f41ea1931e4a6dcb9346087212115727fba9dbc563dd4843c6d5cd9c4dcb1",
+            "tag": "latest",
+            "layers": [
+                {
+                    "digest": "sha256:eaead16dc43bb8811d4ff450935d607f9ba4baffda4fc110cc402fa43f601d83",
+                    "size": 28577834,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:fc8fc12ff57cf7bd85f386410d685d05aa97f7919d429eea9b7a2b6302442c1d",
+                    "size": 1405124,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:fd9a0bba7cc94d3e97410dc7cd5c8ff08c36214cfcaecec202c94ac1acbb30bd",
+                    "size": 208483664,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:8d147e673ad03c4c108b253495cf505e836ff14358911634c6352c29d49a7450",
+                    "size": 65852809,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:d3fa139c3d02358ca26aa21878e076a230b2753ff2c11117a58b809d0a579027",
+                    "size": 5674645,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:264add9235e1d23c0e85924ac923c87f4e412b87e199c54847c207857a0b347e",
+                    "size": 31677559,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:ccf820309d491849cbb8b11dcc6c0587ae852545be07fb9f05343036d43fc018",
+                    "size": 98463906,
+                    "instruction": ""
+                }
+            ]
+        },
+        {
+            "name": "tensorflow-training:2.12.0-cpu-py310-ubuntu20.04-sagemaker",
+            "digest": "sha256:bf54dd8d412383ca434c2bba544f0bf2be980cb498b22855b1af14b6d01b082b",
+            "tag": "latest",
+            "layers": [
+                {
+                    "digest": "sha256:7a2c559011895d255fce249c00396abff5ae7e0c0a92931d0ed493e71de78e3a",
+                    "size": 28580681,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:73078953420f563667a7d525fe43892e8d70dd892b76dd2426a57190d8fca47c",
+                    "size": 233986400,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:2ecb01a700b908df3a38b53f5e0a2fe41d97f528e206b4e422d1fecd7e68611b",
+                    "size": 4203310,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:77db5d91329ec5429f9058fcec72ac47532f49c4f9feb009561a47ac8886b13f",
+                    "size": 104297174,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:8434cb8761631ad89016e3e5585f8cbec37800f08bb0f1743a2447fd613da0a0",
+                    "size": 72608815,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:8681006eb1231b7fb8f1f8dbd27992b248780bddcf9f99061ae14a9dfd50b7fe",
+                    "size": 5296985,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:de625ba7f233f5a3cadd71a092b34116f0f8b314d0646bb5852915d4b17f6d50",
+                    "size": 37773791,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:3c1f9e58ec8476a07455933ed0ee254fa7e922aec32ee69f8f9309730bd4c072",
+                    "size": 168428446,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:3be27a3cd4186fb0e158a9c65b8a51d280dcf23c8d27197a7643d2551d3b27b7",
+                    "size": 18148875,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:9e6e5934c7a1722ab71a02867fc4d51dcf2538ff18b4a965be4e3cd14ac6c186",
+                    "size": 3250940,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:ea584bf969ce867ee153446c573f3213064b964a7fa539ce437e2af00ad40edc",
+                    "size": 816863850,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:3744733e3cadf5d755e69f40e80cf05c4a39271b33b98156fafdbdffd362d0a2",
+                    "size": 284781534,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:c3481b9cb442261e3f9ac07579ee1a03f076823b9c6ed5388f659a3878488af6",
+                    "size": 22120461,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:30ac3254f8a33637b016d9fede73fb1b0ce661acb3cdb503ea7f0e83f6c451a3",
+                    "size": 81599388,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:de995fdd49a5d2ddd767f66f9422cc8c99a782b40f79bb98f6753498d87552d0",
+                    "size": 133435271,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:55d08813bede8707f99fc06037e893b94302e4d745041156233c7a79a4f1ff03",
+                    "size": 3113743,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:690b1721f3fed005f800e1f878ce754aa2d44029be6fcc01fcf6c6c2c26eeba9",
+                    "size": 1605126,
+                    "instruction": ""
+                }
+            ]
+        },
+        {
+            "name": "tensorflow-inference:2.12.1-cpu-py310-ubuntu20.04-ec2",
+            "digest": "sha256:ae3da463b2beeffb190d3fc26ef4db6face6e7b3d13932f759434ebb372f0951",
+            "tag": "latest",
+            "layers": [
+                {
+                    "digest": "sha256:99803d4b97f3db529ae9ca4174b0951afac6b309e7deaa8ec3214c584e02b3a8",
+                    "size": 28578563,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:6543230e2a65c0e33b969c25b7e0db4e1846aff0c50b5704ffc85c58b5ddc68c",
+                    "size": 208764648,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:7c90b85d8cba029b345c678959d50118fa62763ded7ae6cf5c67adb6c0ea9844",
+                    "size": 72607976,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:0643520d435c9caf04590946ce3ff9f75e76a4ab9a689e901d0109691e4b423b",
+                    "size": 5508365,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:5621b66b31badf161c66af7d5b84a51168e84985c789381e5d5801ec94a67022",
+                    "size": 35240722,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:1a2bf48c008cd6e8b9cf5b61050f6fd78b8b1f082e93b1ba078d2192ed03625d",
+                    "size": 109109676,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:88137735cf93502bbc26f28e120828dc1d1dbb509f210a24eb7f41e5c3b6ed0c",
+                    "size": 1129226,
+                    "instruction": ""
+                }
+            ]
+        },
+        {
+            "name": "tensorflow-inference-graviton:2.12.1-cpu-py310-ubuntu20.04-sagemaker",
+            "digest": "sha256:04af04642ae5a9593b58476d62929758f701f43b8c1ea031f2e8ea01ba606af1",
+            "tag": "latest",
+            "layers": [
+                {
+                    "digest": "sha256:2378679266ac5157323158b6e52e7a884e559db5217037e57992e47a1667d525",
+                    "size": 27196396,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:8a220b8c045c2b249904c9635ef5d540f78b62854fad889334f61b21ae1e20b7",
+                    "size": 200115063,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:961439cee36d9d4725358316b81532b5a290605d7ef3bdf306f0b7519a9fb43c",
+                    "size": 72167484,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:9056b0adf7a6e0949a2e1592989dc57b1df4d830d0aedae5714cde72e81f80cb",
+                    "size": 5508640,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:f33efb052f290a664046b7317a94fd012e93d0b0daf185b5e2859d1d74f278fc",
+                    "size": 90603752,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:eea4655862f283b2141a43b436952fa8d6e180fce831ffc7f6aa75c1899a312e",
+                    "size": 112196372,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:ab8251a7dcb5dd9b18fc5d96024e632e4649960f738e69926a061e876f40c67a",
+                    "size": 1141623,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:bb6fb1856c9574533ae3785f7f7d8c1c05f3a087494e0c78ffb07a05e7dbcd11",
+                    "size": 3778443,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:767159154a34141af943ef9495c8f8cce92ee904fed39908e5569edd4f26c839",
+                    "size": 9511909,
+                    "instruction": ""
+                }
+            ]
+        },
+        {
+            "name": "tensorflow-training:2.11.0-cpu-py39-ubuntu20.04-sagemaker",
+            "digest": "sha256:80f628225b8f1f62ec925679ca18675ab0a45978a98c6005af28cfe943a62814",
+            "tag": "latest",
+            "layers": [
+                {
+                    "digest": "sha256:846c0b181fff0c667d9444f8378e8fcfa13116da8d308bf21673f7e4bea8d580",
+                    "size": 28576882,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:4769e15924007fc734f1faa2d9ed67e636d063e3d2dae94e827260a4af4b14ae",
+                    "size": 233610900,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:108f5931c1eb93a973975cdf6f8b11ca19d38041c3980ebf7fe4144695420476",
+                    "size": 4044431,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:e5ad04ef7d62d5c4ddd4e6400aa1a0ff4d4f52d07963f3d4333e123b98dd3cfb",
+                    "size": 104295945,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:8258e5ee8f807133f88ce4bec76aeeb31846ae6c395afa6314be211144563025",
+                    "size": 65855319,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:bbffd43a354c46c230312b01bf8487d18eb30ba1d29669247391eff2ab75df34",
+                    "size": 5674820,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:48fc311bb2587a40193fcdb4631a4fe4480db676c31d3eaf7901966ace26f28a",
+                    "size": 33298365,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:dade0c2312310619f94226d08e9bf1f8d56c15d42db8ceeb9afab467c0db9904",
+                    "size": 178803000,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:1acc0cca9862bb6615001fc1391212976a40707c413a0c4526408502db0873cc",
+                    "size": 3250374,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:1d36e2312af54a430984061e5e7c798e3e33a54b4df5302cd52ee86d84586bde",
+                    "size": 790695241,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:5b55e395e3631687ea52bc959f7aec1abc2b7288116ab088e8416e2eed27a3c5",
+                    "size": 259095993,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:ec9857236e0f5f3c05d761a960b74af3e9ac50e9879d2d500357b58764e11ad7",
+                    "size": 21862959,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:640e8d384191630d7007338d10d5309635a284e8485624516dbfc167e1e639d2",
+                    "size": 101270599,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:c93439177ae3302dac3899bed49a1492808fa67b46499bb0633d3af7762fec73",
+                    "size": 92051343,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:5525c4ed26ead30d7225e2aa1b8cd75daf37d2944be958c8f12a2db13b7a890f",
+                    "size": 2897479,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:a553f2f7c398a3b7632d21390811fcce342078bae9ed3a1a795284a481efd814",
+                    "size": 1592028,
+                    "instruction": ""
+                }
+            ]
+        },
+        {
+            "name": "tensorflow-training:2.9.2-cpu-py39-ubuntu20.04-ec2",
+            "digest": "sha256:cc23b1860c1b303752081d9b78ae0e7a67e8d5b0252afdd99d0d58daa4101630",
+            "tag": "latest",
+            "layers": [
+                {
+                    "digest": "sha256:675920708c8bf10fbd02693dc8f43ee7dbe0a99cdfd55e06e6f1a8b43fd08e3f",
+                    "size": 28572685,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:f6d3c65f4344bcca950a1a8e77f07b0fd66c1ed85fa31984900d14abfd37170b",
+                    "size": 233622486,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:69b7bce4cf28664ff19b40ff2c6f7df6dc4141f199ae95e9d29ce326e0b8538a",
+                    "size": 4044450,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:8af16dc0e3ce0ee56206a01df9449c9c7d0204a602a08482d338cd3d8a7ed079",
+                    "size": 103854905,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:4c14e86b7dcde2dec65e18b5f2986d0902c0b62bef0f817bc65ca5d9626fa3fe",
+                    "size": 65854764,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:53efe989df7cf8c99350d2ae1f92dca668c458603e1f07fe3c416026d17b8d15",
+                    "size": 5652898,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:b39e9c3d979cad6cee8991797e5a57f02475ee1eb353149087e19c5fb4962af6",
+                    "size": 31930257,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:75d17c7747f4f2073509bfa652da38dec7b608bfa8086fef33c3765dd06aff32",
+                    "size": 176040924,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:299e1b0423d8971e35082c3743df366f87730a31304a9fdbf9fac416eff184ee",
+                    "size": 281780956,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:2c7675223e34bdee3e2c11b09f3049b50cd5e6ae1fb443bf89ddf9edd2a517b8",
+                    "size": 19199786,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:22057b4025e1b1373464d89c091168986e3f29d96658f17f20f97ec3a287b2f6",
+                    "size": 1399016,
+                    "instruction": ""
+                }
+            ]
+        },
+        {
+            "name": "pytorch-training:2.0.1-cpu-py310-ubuntu20.04-ec2",
+            "digest": "sha256:6506b45f478f280745fe1424c2ec05f818cfbaedabee2eb2df5cd0076b2ede41",
+            "tag": "latest",
+            "layers": [
+                {
+                    "digest": "sha256:99803d4b97f3db529ae9ca4174b0951afac6b309e7deaa8ec3214c584e02b3a8",
+                    "size": 28578563,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:4b900296874a2ee645cc107c563dc2142d5bd1e134870ddcbb3addc2cf7a3163",
+                    "size": 2932966,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:8039f8befda7e385403736f77721e3e889da6739132edf84eb02828b7246f7ec",
+                    "size": 264498705,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:01719c4f67dd620e719509343de2d1d6138bf43033c6e6e52e9c06a9f0d21364",
+                    "size": 4195224,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:ac2ad3a20e77a349ad38dcd247256cb24f9071e8ca2e906de9ddc8b4d9e7a2b6",
+                    "size": 2998936,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:c67fc52f463fcff02abbe2c263ac72eea7dea114d4c5e545aa129354c300a1de",
+                    "size": 190702394,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:d3524470ae66384720052a5043eb353ee59ae93deaa5e7f8ef8328202dc72d78",
+                    "size": 804694029,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:97d7fbe1225d31d6d3686be59eba02e21599039b4df2c4165bd9af6508e2ab1f",
+                    "size": 1547429702,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:afadf41e4ff7334df66ebad14a4a74bbc5ded580873555b55a0a8bca31b3e43d",
+                    "size": 7531698,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:7f4055b9c3258556fa1b135dbf1aa01a18b01c61441f50de44fee750aea4b4e6",
+                    "size": 139517274,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:2779a0a54edd4bd97258bda541b8ede98e358426f5db1f68eae37deb2e0f0b9c",
+                    "size": 1176741,
+                    "instruction": ""
+                }
+            ]
+        },
+        {
+            "name": "pytorch-inference-graviton:1.12.1-cpu-py38-ubuntu20.04-ec2",
+            "digest": "sha256:50f4502257a0e1464dc00515d1a9723e257d2032e1175de0215a21817c47fccb",
+            "tag": "latest",
+            "layers": [
+                {
+                    "digest": "sha256:0c68957c744181d1b5cae80a96971c651cec74faeade53191985b92abff361da",
+                    "size": 27196161,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:d258594bc5de45252920ff8308ace79b187d68e8890084ecc09abc8410238d09",
+                    "size": 591596618,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:9084646623ca5cc6a4545725d24f49c5dbe2545a2946e20746a697cb62706571",
+                    "size": 153658132,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:d0012f7fa5f9c87a9cc1098cfa7d63a529ef258b8b7445312195e1a5010ed588",
+                    "size": 120012760,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:ea15a4c8f578d8f1335a1c84d2fa95452ef7178e845c31cb73352d3f9b9e008a",
+                    "size": 106116486,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:c50ede30bceb819066bdd2870b129d68414e3623e97363260786e61a20cfae88",
+                    "size": 26960918,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:e1a68ad7baa826ea60890b12888a3b36371493ae6d56b2776d036dd3f1db106f",
+                    "size": 4691535,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:6c6c9c0c2e0f8f3b84e4c75876d0cf8ea802d105ff565120304319ac2e45a154",
+                    "size": 43966138,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:ab32b7eefc8240d1aacbe79a4602045d986ac565ef3708d8d615b3caa643c156",
+                    "size": 334935100,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:3025fd2991148283ca4710fc72b0cb7437e51a0566a4a08e57b9d2f722122ee7",
+                    "size": 8800839,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:fa2cf4d303f47461110bf65ed711b706d2d782213607d3e98c9f2f3536383f30",
+                    "size": 9623086,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:52a7e6272bc70174a9e703bd970fd33d146fa7f301577e9e92db2f466301f417",
+                    "size": 11497653,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:92530962b88e2cf137f7791c838c4c581c6def112026640c01688f0316aa278c",
+                    "size": 118310601,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:297db006487208b0f335908500d794bc61ae888770fce7d871efe388f6f35d9f",
+                    "size": 78539174,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:6cce6abda0869e45d1d0dcadc240de6da83d2732e3ed4f792f6f42dd9136b874",
+                    "size": 1421975,
+                    "instruction": ""
+                }
+            ]
+        },
+        {
+            "name": "huggingface-pytorch-inference:1.13.1-transformers4.26.0-cpu-py39-ubuntu20.04",
+            "digest": "sha256:7b6f3d26d24341f63d51896a0e3cbddc4df8101293d4fcb362fc3b47946e60d1",
+            "tag": "latest",
+            "layers": [
+                {
+                    "digest": "sha256:f0412dfb1aaea4892c13dab6f771bcd79641a4bdcb521ce881f5dcfc0df9a7a5",
+                    "size": 28580519,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:d47c6ed12ae8855313710d867e41f31ba0bca6872c37b26f5cbdefd469635671",
+                    "size": 459868008,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:92112969130a191989bdc1904e1efb3db24e984efa36ab003a4a6551ffe13bf8",
+                    "size": 4194828,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:967598a4878e45908e5cdb0986d55107a2c3ac8a56643abaae5feec5d59b685b",
+                    "size": 489146183,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:9203eadde1b3867c8471870893962a483344218d37a7f4579a32cd6ecf0cc5b0",
+                    "size": 5606222,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:94c3a776e3a0e8a5c7b352a5a2f7716d015a64a5a805357c5e39bdf7a45de99f",
+                    "size": 235861007,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:c7084ab3c2782de8d4f158ff983890f5f1ed02a60daca31c3f0975bb0a8318f1",
+                    "size": 49421607,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:d3b3ecede1ef54752bbd183f8e8c0fbf5e5497055e5a540413ae10723bee4387",
+                    "size": 176418955,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:054fcd1cc32d9d96143442ec514235d1c7a3ec337ed8008a72be34411ce81eeb",
+                    "size": 1588297,
+                    "instruction": ""
+                }
+            ]
+        },
+        {
+            "name": "autogluon-inference:0.8.2-cpu-py39-ubuntu20.04",
+            "digest": "sha256:b89de6d2f2d9a66c83896e94ef7eeb89fa30515800edd0d87d1014e031369142",
+            "tag": "latest",
+            "layers": [
+                {
+                    "digest": "sha256:99803d4b97f3db529ae9ca4174b0951afac6b309e7deaa8ec3214c584e02b3a8",
+                    "size": 28578563,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:9d2042f483634bd0cb091ae15a5dc34f63ba39e61dc08096ac6fc1185d150c54",
+                    "size": 409629448,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:5a6899d318a2af34f4f6a4f912a8ef342a8ffc0911250650e88e06f444787692",
+                    "size": 4194758,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:7fc328926a3e1e76b4563d15cf92b65abf1e8820919f36933f8c64956ce08b9b",
+                    "size": 483225505,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:aa035769fc8215439234dcdd1ad503cb72295c03f8c85c986eab6e978ed16310",
+                    "size": 5605944,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:a9e01d3cfc3a36e13ee8322262c9f5ac59a26d94a21c3aa866ffee620fdca90c",
+                    "size": 365312511,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:bd7bf21de0ce6b358aad62122ab91f8220fb48b48b5c7207d4684a049402b06d",
+                    "size": 85645337,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:5af2623c4163976059924d910f591bed0fb61a2a3c549e9b46a29a8c6d62ab70",
+                    "size": 1353941,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:88714606e98879d183b070e16df43d2102c07dc2cf10431c61f0b677610cd729",
+                    "size": 114612603,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:1f8153aa91c15d2718995f1ded057cdfc610c4c297c73e183fc546e98cdd5321",
+                    "size": 1367324,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:6fa8e7944df25802cc9fb88d4d61bdd8392d35826c07c394997550a701d3a08b",
+                    "size": 43519183,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:22347c2f553463e7505d2545c83dcec0722079251b21e1dc7cb139aeb43faa86",
+                    "size": 756774415,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:2b3f043d1e7587e5f16b73827537770c4585874fdd581b7ff33549dae8988d6e",
+                    "size": 1434084,
+                    "instruction": ""
+                }
+            ]
+        },
+        {
+            "name": "autogluon-training:0.6.2-cpu-py38-ubuntu20.04",
+            "digest": "sha256:13129e2bd1bc216d3f888d70118454b19f7e37c18a6d1eab365d08115bf2e320",
+            "tag": "latest",
+            "layers": [
+                {
+                    "digest": "sha256:846c0b181fff0c667d9444f8378e8fcfa13116da8d308bf21673f7e4bea8d580",
+                    "size": 28576882,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:11a377009b9a45ec7f70ff7a448fe6fb64845a9e5c39a235383a213226c773b5",
+                    "size": 264239838,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:ccb7279eaffc3bd18f77e5e912f54ae09edb8315cf2797e167c98669f7087abb",
+                    "size": 4036751,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:308b3daa4529975108cc1901fa93e948dd2baa8fa7957914098a5e890c01a513",
+                    "size": 3001327,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:346e6dfc13bf9e502ae909be6ff12a73cde960f5724e58316063d232fb7cbd7b",
+                    "size": 537311141,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:f3220ce4a2a7b7e50e062bdc51f237c94a35f4c867daed00c2f4d53a772b8636",
+                    "size": 94608329,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:dcc0b1ddebfd091bb51bf09b868547ece0ab6004bd1a2dfe0dbf3e877b236b1d",
+                    "size": 221049650,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:c844ce60b297d6a03eb1ed374b90ccd2ff9eaa7e370da255c457bd87614fb236",
+                    "size": 6339764,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:272e2c1fa39829b4424ebc4895d297e6a433f617a9b2171b73666cd122467a7b",
+                    "size": 27159700,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:24f564c7f70a69ea38e98c3a0ad420c48cc5bb3f5bf1f028203fe0287c737b01",
+                    "size": 51937572,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:e0415c17565796a248bac8f3cba734837cae66ca89df7211227dafb92fd318f4",
+                    "size": 86037863,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:7cec03847aa6f511c80ab4fc5b22ad046e0e4ba609515d3d399b7f5f1fed4b87",
+                    "size": 1182087,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:2c4c7d469bc988b0cb276cc638ef4cb984ce8b2b29478687efbdc82ec8340e2c",
+                    "size": 33190934,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:68484d3f1fc790f78a39ed945332851930442bdf7d47974943ae5e451fb72d14",
+                    "size": 754750676,
+                    "instruction": ""
+                },
+                {
+                    "digest": "sha256:a4fc0c484978a65b8326605f51b576e389331f8b0ec31195622427505f5718c2",
+                    "size": 1243807,
+                    "instruction": ""
+                }
+            ]
+        }
+    ],
+    "applications": {
+        "random_requirements": {
+            "service_demand_values": [
+                {
+                    "cpu_demand": 2,
+                    "memory_demand": 2048
+                },
+                {
+                    "cpu_demand": 4,
+                    "memory_demand": 4096
+                },
+                {
+                    "cpu_demand": 8,
+                    "memory_demand": 8192
+                }
+            ]
+        },
+        "specifications": [
+            {
+                "label": "app-pytorch-inference-graviton:2.1.0-cpu-py310-ubuntu20.04-sagemaker",
+                "number_of_objects": 16,
+                "services": [
+                    {
+                        "label": "service-pytorch-inference-graviton:2.1.0-cpu-py310-ubuntu20.04-sagemaker",
+                        "image_digest": "sha256:21586761c63bb8e224eed7779d8fcff7dc6bb096fbadf4c75870f22919417bf9",
+                        "state": 0
+                    }
+                ]
+            },
+            {
+                "label": "app-tensorflow-inference-graviton:2.9.1-cpu-py38-ubuntu20.04-ec2",
+                "number_of_objects": 16,
+                "services": [
+                    {
+                        "label": "service-tensorflow-inference-graviton:2.9.1-cpu-py38-ubuntu20.04-ec2",
+                        "image_digest": "sha256:8a3e24828eefa58e74f2495cceff4322d3eb8efb00da69371d32cae18511064c",
+                        "state": 0
+                    }
+                ]
+            },
+            {
+                "label": "app-tensorflow-inference:2.12.1-cpu-py310-ubuntu20.04-sagemaker",
+                "number_of_objects": 16,
+                "services": [
+                    {
+                        "label": "service-tensorflow-inference:2.12.1-cpu-py310-ubuntu20.04-sagemaker",
+                        "image_digest": "sha256:9ae77a4b4006fde3e44f48d6e65322218458bcbf206d83516e11a69c5767019d",
+                        "state": 0
+                    }
+                ]
+            },
+            {
+                "label": "app-pytorch-inference-graviton:1.12.1-cpu-py38-ubuntu20.04-sagemaker",
+                "number_of_objects": 16,
+                "services": [
+                    {
+                        "label": "service-pytorch-inference-graviton:1.12.1-cpu-py38-ubuntu20.04-sagemaker",
+                        "image_digest": "sha256:ab7d9eb2f97fb079a44b72f1837b9aeaa4661c9707b0d44ad1f545146ab60974",
+                        "state": 0
+                    }
+                ]
+            },
+            {
+                "label": "app-tensorflow-training:2.8.3-cpu-py39-ubuntu20.04-sagemaker",
+                "number_of_objects": 16,
+                "services": [
+                    {
+                        "label": "service-tensorflow-training:2.8.3-cpu-py39-ubuntu20.04-sagemaker",
+                        "image_digest": "sha256:ea39e3fe10e3fabebcfb498b5ec81e781e9b809886c2d5b384ce2f5dd1c1ddd6",
+                        "state": 0
+                    }
+                ]
+            },
+            {
+                "label": "app-tensorflow-inference:2.9.2-cpu-py39-ubuntu20.04-ec2",
+                "number_of_objects": 16,
+                "services": [
+                    {
+                        "label": "service-tensorflow-inference:2.9.2-cpu-py39-ubuntu20.04-ec2",
+                        "image_digest": "sha256:8d9f41ea1931e4a6dcb9346087212115727fba9dbc563dd4843c6d5cd9c4dcb1",
+                        "state": 0
+                    }
+                ]
+            },
+            {
+                "label": "app-tensorflow-training:2.12.0-cpu-py310-ubuntu20.04-sagemaker",
+                "number_of_objects": 16,
+                "services": [
+                    {
+                        "label": "service-tensorflow-training:2.12.0-cpu-py310-ubuntu20.04-sagemaker",
+                        "image_digest": "sha256:bf54dd8d412383ca434c2bba544f0bf2be980cb498b22855b1af14b6d01b082b",
+                        "state": 0
+                    }
+                ]
+            },
+            {
+                "label": "app-tensorflow-inference:2.12.1-cpu-py310-ubuntu20.04-ec2",
+                "number_of_objects": 16,
+                "services": [
+                    {
+                        "label": "service-tensorflow-inference:2.12.1-cpu-py310-ubuntu20.04-ec2",
+                        "image_digest": "sha256:ae3da463b2beeffb190d3fc26ef4db6face6e7b3d13932f759434ebb372f0951",
+                        "state": 0
+                    }
+                ]
+            },
+            {
+                "label": "app-tensorflow-inference-graviton:2.12.1-cpu-py310-ubuntu20.04-sagemaker",
+                "number_of_objects": 16,
+                "services": [
+                    {
+                        "label": "service-tensorflow-inference-graviton:2.12.1-cpu-py310-ubuntu20.04-sagemaker",
+                        "image_digest": "sha256:04af04642ae5a9593b58476d62929758f701f43b8c1ea031f2e8ea01ba606af1",
+                        "state": 0
+                    }
+                ]
+            },
+            {
+                "label": "app-tensorflow-training:2.11.0-cpu-py39-ubuntu20.04-sagemaker",
+                "number_of_objects": 16,
+                "services": [
+                    {
+                        "label": "service-tensorflow-training:2.11.0-cpu-py39-ubuntu20.04-sagemaker",
+                        "image_digest": "sha256:80f628225b8f1f62ec925679ca18675ab0a45978a98c6005af28cfe943a62814",
+                        "state": 0
+                    }
+                ]
+            },
+            {
+                "label": "app-tensorflow-training:2.9.2-cpu-py39-ubuntu20.04-ec2",
+                "number_of_objects": 16,
+                "services": [
+                    {
+                        "label": "service-tensorflow-training:2.9.2-cpu-py39-ubuntu20.04-ec2",
+                        "image_digest": "sha256:cc23b1860c1b303752081d9b78ae0e7a67e8d5b0252afdd99d0d58daa4101630",
+                        "state": 0
+                    }
+                ]
+            },
+            {
+                "label": "app-pytorch-training:2.0.1-cpu-py310-ubuntu20.04-ec2",
+                "number_of_objects": 16,
+                "services": [
+                    {
+                        "label": "service-pytorch-training:2.0.1-cpu-py310-ubuntu20.04-ec2",
+                        "image_digest": "sha256:6506b45f478f280745fe1424c2ec05f818cfbaedabee2eb2df5cd0076b2ede41",
+                        "state": 0
+                    }
+                ]
+            },
+            {
+                "label": "app-pytorch-inference-graviton:1.12.1-cpu-py38-ubuntu20.04-ec2",
+                "number_of_objects": 16,
+                "services": [
+                    {
+                        "label": "service-pytorch-inference-graviton:1.12.1-cpu-py38-ubuntu20.04-ec2",
+                        "image_digest": "sha256:50f4502257a0e1464dc00515d1a9723e257d2032e1175de0215a21817c47fccb",
+                        "state": 0
+                    }
+                ]
+            },
+            {
+                "label": "app-huggingface-pytorch-inference:1.13.1-transformers4.26.0-cpu-py39-ubuntu20.04",
+                "number_of_objects": 16,
+                "services": [
+                    {
+                        "label": "service-huggingface-pytorch-inference:1.13.1-transformers4.26.0-cpu-py39-ubuntu20.04",
+                        "image_digest": "sha256:7b6f3d26d24341f63d51896a0e3cbddc4df8101293d4fcb362fc3b47946e60d1",
+                        "state": 0
+                    }
+                ]
+            },
+            {
+                "label": "app-autogluon-inference:0.8.2-cpu-py39-ubuntu20.04",
+                "number_of_objects": 16,
+                "services": [
+                    {
+                        "label": "service-autogluon-inference:0.8.2-cpu-py39-ubuntu20.04",
+                        "image_digest": "sha256:b89de6d2f2d9a66c83896e94ef7eeb89fa30515800edd0d87d1014e031369142",
+                        "state": 0
+                    }
+                ]
+            },
+            {
+                "label": "app-autogluon-training:0.6.2-cpu-py38-ubuntu20.04",
+                "number_of_objects": 16,
+                "services": [
+                    {
+                        "label": "service-autogluon-training:0.6.2-cpu-py38-ubuntu20.04",
+                        "image_digest": "sha256:13129e2bd1bc216d3f888d70118454b19f7e37c18a6d1eab365d08115bf2e320",
+                        "state": 0
+                    }
+                ]
+            }
+        ]
+    },
+    "users": [
+        {
+            "number_of_objects": 40,
+            "mobility_model": "edge_sim_py.pathway",
+            "seconds_to_move": {
+                "min": 45,
+                "max": 185
+            },
+            "type": "vehicle"
+        },
+        {
+            "number_of_objects": 216,
+            "mobility_model": "edge_sim_py.pathway",
+            "seconds_to_move": {
+                "min": 333,
+                "max": 1000
+            },
+            "type": "pedestrian"
+        }
+    ]
+}
