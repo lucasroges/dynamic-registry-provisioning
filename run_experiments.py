@@ -4,18 +4,23 @@ from subprocess import Popen, DEVNULL, TimeoutExpired
 import itertools
 import os
 
-NUMBER_OF_PARALLEL_PROCESSES =  os.cpu_count() - 1
+NUMBER_OF_PARALLEL_PROCESSES =  os.cpu_count()
 
 SEED = "1"
 
-def run_simulation(algorithm, dataset):
+def run_simulation(algorithm, dataset, replicas):
     """Executes the simulation with the specified parameters.
 
     Args:
         algorithm (str): Algorithm to be executed.
         dataset (str): Dataset to be used.
+        replicas (int): Number of replicas to be used in the resource aware dynamic strategy.
     """
-    cmd = f"poetry run python -m simulation -a {algorithm} -d {dataset} -s {SEED} -n 3600"
+    cmd = (
+        f"poetry run python -m simulation -a {algorithm} -d {dataset} -s {SEED} -n 3600 -r {replicas}"
+        if replicas is not None
+        else f"poetry run python -m simulation -a {algorithm} -d {dataset} -s {SEED} -n 3600"
+    )
     print(f"    cmd = {cmd}")
 
     return Popen([cmd], stdout=DEVNULL, stderr=DEVNULL, shell=True)
@@ -28,23 +33,26 @@ algorithms = [
     ("community", "community25p"),
     ("p2p", "p2p"),
     ("dynamic", "p2p"),
+    ("resource_aware_dynamic", "p2p", 1),
+    ("resource_aware_dynamic", "p2p", 2),
+    ("resource_aware_dynamic", "p2p", 3),
+    ("resource_aware_dynamic", "p2p", 4),
 ]
 
-number_of_nodes = [
-    100,
-    196
+variations = [
+    "nodes=100;unique_images=08",
+    "nodes=100;unique_images=32",
+    "nodes=196;unique_images=16",
+    "nodes=196;unique_images=64",
 ]
 
-users_per_apps = [4, 16]
-
-print(f"GENERATING {len(algorithms) * len(number_of_nodes) * len(users_per_apps)} COMBINATIONS")
+print(f"GENERATING {len(algorithms) * len(variations)} COMBINATIONS")
 
 # Generating list of combinations with the parameters specified
 combinations = list(
     itertools.product(
         algorithms,
-        number_of_nodes,
-        users_per_apps,
+        variations,
     )
 )
 
@@ -55,16 +63,19 @@ print(f"EXECUTING {len(combinations)} COMBINATIONS")
 for i, parameters in enumerate(combinations, 1):
     # Parsing parameters
     algorithm = parameters[0]
-    number_of_nodes = parameters[1]
-    users_per_app = parameters[2]
+    variation = parameters[1]
+    number_of_nodes = variation[6:9]
+    number_of_unique_images = variation[24:]
+    replicas = algorithm[2] if len(algorithm) == 3 else None
 
     print(f"\t[Execution {i}]")
-    print(f"\t\t[algorithm={algorithm[0]}] [number_of_nodes={number_of_nodes}] [users_per_app={users_per_app}]")
+    print(f"\t\t[algorithm={algorithm[0]}] [nodes={number_of_nodes}] [unique_images={number_of_unique_images}]")
 
     # Executing algorithm
     proc = run_simulation(
         algorithm=algorithm[0],
-        dataset=f"datasets/{algorithm[1]}\;nodes\={number_of_nodes}\;users_per_app={users_per_app}.json"
+        dataset=f"datasets/{algorithm[1]}\;nodes\={number_of_nodes}\;unique_images={number_of_unique_images}.json",
+        replicas=replicas,
     )
 
     processes.append(proc)
