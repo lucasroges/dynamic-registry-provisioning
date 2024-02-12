@@ -1,6 +1,7 @@
 from .utils import *
 from .strategies import *
 
+import os
 import sys
 import json
 import random
@@ -133,6 +134,8 @@ def main(seed: int, input_filename: str, output_filename: str, registry_provisio
     dataset_analysis(seed, input_filename, output_filename, registry_provisioning, communities)
 
     # Displaying topology
+    if not os.path.exists("datasets/topologies/"):
+        os.makedirs("datasets/topologies/")    
     display_topology(
         edge_sim_py.Topology.first(),
         output_filepath="datasets/topologies/",
