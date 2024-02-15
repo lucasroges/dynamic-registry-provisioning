@@ -1,6 +1,8 @@
 # Dynamic Registry Provisioning
 
-TBD.
+This repository contains the material related to my Master's thesis.
+
+The aim of this work is to dynamically provision and deprovision P2P registries (cache-based registries) in edge computing infrastructures to minimize the latency between users and applications, the provisioning time of application, and the infrastructure resource usage.
 
 ## Configuring the environment
 
