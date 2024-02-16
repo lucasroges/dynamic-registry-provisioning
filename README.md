@@ -10,7 +10,6 @@ This project was configured with Poetry to manage its dependencies. Please ensur
 
 After installing these tools, you can install the dependencies of the project with the following command:
 
-
 ```sh
 poetry install
 ```
@@ -22,7 +21,6 @@ To build the necessary datasets to replicate the paper's experiments, navigate t
 ```sh
 sh create_datasets.sh
 ```
-
 
 ## Running the experiments
 
